@@ -20,6 +20,7 @@ from django.http import HttpResponse
 import csv
 import io
 import json
+from django.utils import timezone as tz
 
 
 class TaskViewSet(
@@ -293,13 +294,11 @@ class TaskViewSet(
     @action(detail=False, methods=["post"], url_path="auto-plan-day")
     def auto_plan_day(self, request):
         """Suggest a daily plan across active tasks (todo/in_progress)."""
-        from django.utils import timezone
-
         tasks = list(
             Task.objects.filter(status__in=["todo", "in_progress"]).select_related("category").prefetch_related("contexts")
         )
         orchestrator = AiOrchestrator(get_provider())
-        now_iso = timezone.now().isoformat()
+        now_iso = tz.now().isoformat()
         plan = []
         for t in tasks[:10]:
             payload_task = {
@@ -324,6 +323,56 @@ class TaskViewSet(
                 }
             )
         return Response({"now": now_iso, "plan": plan})
+
+    @action(detail=False, methods=["post"], url_path="seed-sample-data")
+    def seed_sample_data(self, request):
+        user = request.user
+        if not user or not user.is_authenticated:
+            return Response({"detail": "Authentication required"}, status=401)
+        # Ensure base categories
+        for name in ["Work", "Personal", "Health", "Finance"]:
+            Category.objects.get_or_create(name=name)
+        # Seed contexts
+        from contexts.models import ContextEntry
+        ctxs = ContextEntry.objects.filter(owner=user)
+        if ctxs.count() < 6:
+            defaults = [
+                ("whatsapp", "Client moved meeting to Friday 10am"),
+                ("email", "Boss: please send Q3 projections by next Tuesday"),
+                ("note", "Buy groceries: milk, bread, eggs"),
+                ("note", "Gym schedule: 3x this week"),
+                ("email", "Invoice payment reminder due in 5 days"),
+                ("whatsapp", "Trip planning with friends next month"),
+            ]
+            need = 6 - ctxs.count()
+            for stype, content in defaults[:need]:
+                ContextEntry.objects.create(owner=user, source_type=stype, content=content, raw_metadata={})
+        # Seed tasks
+        titles = [
+            "Prepare Q3 report",
+            "Email Pattabi about new servers",
+            "Buy groceries",
+            "Gym session",
+            "Pay utility bill",
+            "Code review backlog",
+            "Plan team retro",
+            "Refactor API endpoints",
+            "Write test cases",
+            "Archive old documents",
+        ]
+        statuses = ["todo", "in_progress", "done", "archived"]
+        count = Task.objects.filter(owner=user).count()
+        for i in range(count, 10):
+            Task.objects.create(
+                owner=user,
+                title=titles[i % len(titles)],
+                description="Seeded task",
+                category=Category.objects.order_by('?').first(),
+                status=statuses[i % len(statuses)],
+                due_date=tz.now() + tz.timedelta(days=i),
+                priority_score=min(0.95, 0.2 + (i * 0.05)),
+            )
+        return Response({"ok": True})
 
     @action(detail=False, methods=["get"], url_path="export")
     def export(self, request):
