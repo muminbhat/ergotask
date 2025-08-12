@@ -1,4 +1,4 @@
-<img width="1919" height="1079" alt="Screenshot 2025-08-12 172230" src="https://github.com/user-attachments/assets/f2ddfe52-88b2-4619-a012-5d02d817e8e7" />Smart Todo API (Backend) - Prepared for Ergosphere.io (Evaluation Purpose Only) - By Mumin Bhat (12th August 2025)
+Smart Todo API (Backend) - Prepared for Ergosphere.io (Evaluation Purpose Only) - By Mumin Bhat (12th August 2025)
 
 Overview
 - AI-powered task management with context analysis, priority scoring, deadline suggestions, and scheduling.
@@ -11,19 +11,19 @@ Overview
 
 - Dashboard
    
-![Uploading Screenshot 2025-08-12 172139.png…]()
+<img width="1896" height="1079" alt="Screenshot 2025-08-12 172139" src="https://github.com/user-attachments/assets/6f3b48c3-afdf-4997-9350-69272b3e7f8b" />
 
 - Tasks
 
-![Uploading Screenshot 2025-08-12 172154.png…]()
+<img width="1918" height="1079" alt="Screenshot 2025-08-12 172154" src="https://github.com/user-attachments/assets/5463b3f4-9571-4ec3-b6cb-0bfa41200414" />
 
 - Context
 
-![Uploading Screenshot 2025-08-12 172208.png…]()
+<img width="1919" height="1074" alt="Screenshot 2025-08-12 172208" src="https://github.com/user-attachments/assets/f641e85b-efc2-4813-842c-79580ebbd5ca" />
 
 - Task Detail
 
-![Uploading Screenshot 2025-08-12 172230.png…]()
+<img width="1919" height="1079" alt="Screenshot 2025-08-12 172230" src="https://github.com/user-attachments/assets/9952b262-c08e-42c8-bb32-79b9e417f15d" />
 
 Local setup
 
