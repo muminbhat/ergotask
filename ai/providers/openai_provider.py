@@ -9,7 +9,7 @@ from .base import AiProvider, GenerateParams
 @dataclass
 class OpenAiProvider(AiProvider):
     model: str = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
-    api_key: str = os.environ.get("OPENAI_API_KEY", "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")
+    api_key: str = os.environ.get("OPENAI_API_KEY", "fall-back-key-hardcode-here")
 
     def generate(self, *, system_prompt: str, user_prompt: str, params: GenerateParams) -> str:
         try:
@@ -26,7 +26,7 @@ class OpenAiProvider(AiProvider):
                 trust_env=False,  # ignore system proxy env that may inject unsupported args
             )
             client = OpenAI(
-                api_key=self.api_key or os.environ.get("OPENAI_API_KEY", "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"),
+                api_key=self.api_key or os.environ.get("OPENAI_API_KEY", "fall-back-key-hardcode-here"),
                 http_client=http_client,
                 base_url=os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
                 max_retries=0,
