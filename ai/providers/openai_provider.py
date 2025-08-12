@@ -9,7 +9,7 @@ from .base import AiProvider, GenerateParams
 @dataclass
 class OpenAiProvider(AiProvider):
     model: str = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
-    api_key: str = os.environ.get("OPENAI_API_KEY", "paste-your-key-here")
+    api_key: str = os.environ.get("OPENAI_API_KEY", "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")
 
     def generate(self, *, system_prompt: str, user_prompt: str, params: GenerateParams) -> str:
         try:
@@ -26,7 +26,7 @@ class OpenAiProvider(AiProvider):
                 trust_env=False,  # ignore system proxy env that may inject unsupported args
             )
             client = OpenAI(
-                api_key=self.api_key or os.environ.get("OPENAI_API_KEY", "paste-your-key-here"),
+                api_key=self.api_key or os.environ.get("OPENAI_API_KEY", "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"),
                 http_client=http_client,
                 base_url=os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
                 max_retries=0,
