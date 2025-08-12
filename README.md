@@ -1,10 +1,32 @@
-Smart Todo API (Backend) - Prepared for Ergosphere.io (Evaluation Purpose Only) - By Mumin Bhat (12th August 2025)
+<img width="1919" height="1079" alt="Screenshot 2025-08-12 172230" src="https://github.com/user-attachments/assets/f2ddfe52-88b2-4619-a012-5d02d817e8e7" />Smart Todo API (Backend) - Prepared for Ergosphere.io (Evaluation Purpose Only) - By Mumin Bhat (12th August 2025)
 
 Overview
 - AI-powered task management with context analysis, priority scoring, deadline suggestions, and scheduling.
-- This service exposes a REST API that is used by the Next.js frontend. 
+- This service exposes a REST API that is used by the Next.js frontend.
+
+
+- Can be accessed here: **https://ergotask.muminbhat.com/**
+
+- Below are the screenshots that are attached from the Frontend
+
+- Dashboard
+   
+![Uploading Screenshot 2025-08-12 172139.png…]()
+
+- Tasks
+
+![Uploading Screenshot 2025-08-12 172154.png…]()
+
+- Context
+
+![Uploading Screenshot 2025-08-12 172208.png…]()
+
+- Task Detail
+
+![Uploading Screenshot 2025-08-12 172230.png…]()
 
 Local setup
+
 1) Python 3.11+ and virtualenv or venv as you preffer
 2) Install deps:
    - `pip install -r requirements.txt`
