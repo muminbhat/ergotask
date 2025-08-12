@@ -23,3 +23,20 @@
 ## Docs
 - /api/docs, /api/redoc, /api/schema
 
+## Railway deployment
+- Root: `app/backend`
+- Build command:
+  - `pip install -r requirements.txt`
+  - `python manage.py collectstatic --noinput`
+  - `python manage.py migrate`
+  - `python manage.py seed_categories`
+- Start command: `gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT`
+- Env vars:
+  - `DJANGO_SETTINGS_MODULE=backend.settings.prod`
+  - `DJANGO_ALLOWED_HOSTS=<your-domain>`
+  - `FRONTEND_ORIGIN=<your-frontend-origin>`
+  - `DATABASE_URL=<railway-postgres-url>`
+  - `REDIS_URL=<railway-redis-url>`
+  - `AI_PROVIDER=openai`, `OPENAI_API_KEY=...`
+  - `CELERY_TASK_ALWAYS_EAGER=true` (set to false when worker is running)
+
